@@ -1,0 +1,25 @@
+{
+  "name": "coding",
+  "version": "0.0.1",
+  "description": "pratice coding width js",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gpzjyw/coding.git"
+  },
+  "author": "jipeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gpzjyw/coding/issues"
+  },
+  "homepage": "https://github.com/gpzjyw/coding#readme",
+  "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
+  }
+}
