@@ -20,6 +20,31 @@ export const isObject = (target) => {
 
 const getType = input => Object.prototype.toString.call(input).slice(8, -1).toLowerCase();
 
+function cloneFunc(func: Function) {
+  const bodyReg = /(?<={)(.|\n)+(?=})/m;
+  const paramReg = /(?<=\().+(?=\)\s+{)/;
+  const funcString = func.toString();
+  if (func.prototype) {
+    const param = paramReg.exec(funcString);
+    const body = bodyReg.exec(funcString);
+    if (body) {
+      console.log('匹配到函数体：', body[0]);
+      if (param) {
+          const paramArr = param[0].split(',');
+          console.log('匹配到参数：', paramArr);
+          return new Function(...paramArr, body[0]);
+      } else {
+          return new Function(body[0]);
+      }
+    } else {
+        return null;
+    }
+  } else {
+    // 箭头函数
+    eval(funcString);
+  }
+}
+
 // 基本类型、对象、函数
 export const deepClone = (target: any, circleRef = new WeakMap()) => {
   // 非引用类型
@@ -35,6 +60,8 @@ export const deepClone = (target: any, circleRef = new WeakMap()) => {
 
   // 引用类型处理
   switch (type) {
+    case funtionTag:
+      return cloneFunc(target);
     case arrayTag:
       // 数组
       const initArr = new Array;
