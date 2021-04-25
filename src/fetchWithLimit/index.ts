@@ -69,3 +69,19 @@ class FetchWidthLimit {
     this.count -= 1;
   }
 }
+
+const now = () => new Date().valueOf();
+let lastFetchTime = 0;
+
+const fetchLater = () => {
+  const startTime = now();
+  fetch('').then(res => {
+    if (res.status === 200) {
+      if (startTime > lastFetchTime) {
+        /** ... **/
+        lastFetchTime = startTime;
+      }
+    }
+  });
+
+}
